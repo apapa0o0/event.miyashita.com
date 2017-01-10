@@ -1,0 +1,205 @@
+body{margin:0; padding:0}
+#canvas{margin:0; padding:0; background-color:#eeeeee}
+#main{
+position: absolute; top:0px;left:0px; z-index: 1;
+color: #ffffff;
+}
+#maplink{
+position: absolute; top:2065px;left:1150px; z-index: 2;
+}
+#sensact{
+position: absolute; top:3040px;left:1130px; z-index: 2; opacity: 1.0;
+}
+#socialBtns{
+position: absolute; top:1788px;left:665px; z-index: 2;
+}
+#mlink{
+position: absolute; top:1775px;left:665px; z-index: 2;
+}
+#kumapan{
+position: absolute; top:-80px;left:50%; z-index: 2;
+}
+div#gaiyoulink{
+position: absolute; top:1267px;left:531px; width:139px; height:45px; z-index: 2;background-color: #eeeeee;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#gaiyoulink:hover{
+border:10px solid #eeeeee;
+background-color: #007a7a;
+}
+div#accesslink{
+position: absolute; top:1267px;left:531px; width:139px; height:45px; z-index: 2;background-color: #eeeeee;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#accesslink:hover{
+border:10px solid #eeeeee;
+background-color: #007a7a;
+}
+div#sensactlink{
+position: absolute; top:1267px;left:531px; width:100px; height:45px; z-index: 2;background-color: #eeeeee;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#sensactlink:hover{
+border:10px solid #eeeeee;
+background-color: #007a7a;
+}
+div#programlink{
+position: absolute; top:1267px;left:761px; width:159px; height:45px; z-index: 2;background-color: #eeeeee;
+
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#programlink:hover{
+border:10px solid #eeeeee;
+background-color: #007a7a;
+}
+div#naiyoulink{
+position: absolute; top:1267px;left:991px; width:139px; height:45px; z-index: 2;background-color: #eeeeee;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#naiyoulink:hover{
+border:10px solid #eeeeee;
+background-color: #007a7a;
+}
+div#miyashitalablink{
+position: absolute; top:1267px;left:1221px; width:159px; height:45px; z-index: 2;background-color: #eeeeee;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#miyashitalablink:hover{
+border:10px solid #eeeeee;
+background-color: #007a7a;
+}
+div.mlink{
+background-color: #ff0000;
+opacity:0.0;
+-webkit-transition: background-color 0.3s linear,opacity 0.3s linear;
+cursor: pointer;
+}
+.mlink:hover{
+opacity:0.20;
+background-color: #007a7a;
+}
+div.mlink2{
+background-color: #007a7a;
+opacity:0.0;
+-webkit-transition: background-color 0.3s linear,opacity 0.3s linear;
+cursor: pointer;
+}
+.mlink2:hover{
+opacity:0.20;
+background-color: #ffff00;
+}
+
+div#mlabsmalllink{
+position: absolute; top:1590px;left:1321px; width:159px; height:23px; z-index: 2;
+}
+div#sensactsmalllink{
+position: absolute; top:1613px;left:1321px; width:280px; height:23px; z-index: 2;
+}
+div#sensactsmalllink2{
+position: absolute; top:1877px;left:1321px; width:90px; height:23px; z-index: 2
+}
+div#sensactweb{
+position: absolute; top:3247px;left:621px; width:230px; height:17px; z-index: 2
+}
+div#sensactatnd{
+position: absolute; top:3267px;left:1321px; width:210px; height:17px; z-index: 2
+}
+
+div#facebooklink{
+position: absolute; top:1832px;left:1321px; width:70px; height:23px; z-index: 2;
+}
+div#atndlink{
+position: absolute; top:1832px;left:1321px; width:50px; height:23px; z-index: 2;
+}
+div#interviews{
+position: absolute; top:1920px;left:1321px; width:250px; height:23px; z-index: 2;
+}
+
+
+
+#kanban1 {
+	position:absolute;
+	z-index:2;
+	top:-45px;
+	left: 50%;
+	margin-left:-285px;
+	-webkit-transform-origin: 60% top;
+	-webkit-transform:;
+	-webkit-animation:f1 2000ms ease-in-out infinite alternate;
+}
+
+#kanban2 {
+	position:absolute;
+	z-index:2;
+	top:-45px;
+	left: 50%;
+	margin-left:30px;
+	-webkit-transition: all 0.5s linear;
+	-webkit-transform-origin:30% 0%;
+	-webkit-transform: rotate(-70deg);
+}
+#kanban2:hover{
+	-webkit-transform: rotate(0deg);
+}
+#wing2 {
+	top:6px;
+	left:22px;
+	-webkit-transform-origin:right top;
+	-webkit-transform:;
+	-webkit-animation:f2 500ms linear infinite alternate;
+}
+#h_body {
+	-webkit-animation:body_anime 500ms linear infinite alternate;
+}
+@-webkit-keyframes 'f1' {
+	from {
+	}
+	to {
+		-webkit-transform:rotate3d(0,0,1,-5deg);
+	}
+}
+@-webkit-keyframes 'f2' {
+	from {
+	}
+	to {
+		-webkit-transform:rotate3d(10,-2,0,160deg);
+	}
+}
+@-webkit-keyframes 'body_anime' {
+	from {
+	}
+	to {
+		-webkit-transform:rotate(-15deg);
+	}
+}
+@-webkit-keyframes 'move' {
+	from {
+	}
+	to {
+		left:-60px;
+	}
+}
+@-webkit-keyframes 'updown' {
+	from {
+	}
+	to {
+		top:50px;
+	}
+}

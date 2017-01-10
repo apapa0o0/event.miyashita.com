@@ -1,0 +1,300 @@
+@charset "shift_jis";
+
+
+
+body {
+	font-family: "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro";
+	font-size: 75%;
+	line-height: 2;
+	color: #ffffff;
+	background-color: #000000;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+h1,h2,h3,h4,h5,p,ul,ol,li,dl,dt,dd,form{
+	margin: 0px;
+	padding: 0px;
+}
+
+ul{
+	list-style-type: none;
+}
+
+img {
+	border: none;
+}
+
+input,textarea,select {
+	font-size: 1em;
+}
+
+form {
+	margin: 0px;
+}
+
+table {
+	border-collapse:collapse;
+	font-size: 100%;
+	border-spacing: 0;
+}
+
+
+
+a {
+	color: #ffffff;
+}
+td a {
+	color: #ffffff;	
+	text-decoration: none;
+}
+td a:hover {
+	color: #222222;	
+	background-color: #eeeeee;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FF0000;			
+	text-decoration: none;	
+}
+
+
+#contents {
+	width: 1020px;
+	text-align: left;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+
+#koukoku {
+	background-image: url(title.png);
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 170px;
+	margin: 0 auto;
+}
+
+/*h1タグ設定*/
+#koukoku h1 {
+	font-size: 10px;	/*文字サイズ*/
+	color: #FFFFFF;		/*文字色*/
+	line-height: 40px;
+	font-weight: normal;
+	text-align: right;	/*テキストを右寄せ*/
+}
+
+
+
+/*メインメニュー設定
+---------------------------------------------------------------------------*/
+
+
+#ID {
+padding-left: 123px;
+width:500em;
+height:3em;  
+margin: 0; 
+
+white-space:nowrap;
+}
+#ID ul { 
+margin: 0; 
+padding :0; 
+list-style-type : none; 
+}
+#ID li { 
+display : inline; 
+padding :0; 
+margin:0; 
+float:left ;
+}
+#ID a {
+display:block; 
+border:2px dotted #ddd;
+background-color:#333;
+font-size:large;
+padding:1px 0px 1px 0px;
+text-decoration:none;
+color:#eee;width:7em; 
+height:2.0em;
+width:10.0em;
+margin:0px 5px; 
+text-align:center;
+}
+#ID a:hover {
+display:block; 
+border:2px dotted #aaa;
+background-color:#eee;
+font-size:large;
+padding:1px 0px 1px 0px;
+text-decoration:none;
+color:#222;
+height:2.0em;
+width:10.0em;
+text-align:center;
+}
+
+
+/*トップページ内「更新情報・お知らせ」ブロック
+---------------------------------------------------------------------------*/
+#main .new {
+	overflow: auto;
+	height: 150px;			/*ボックスの高さ*/
+	width: 752px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-top: 0.5em;
+}
+
+#main .new dl {
+	clear: left;
+	width: 732px;
+	border-bottom: 1px solid #333333;	/*日付ごとに入る下線の幅、線種、色*/
+	overflow: hidden;
+}
+
+#main .new dt {
+	font-weight: bold;	/*日付を太字に*/
+	float: left;
+	width: 100px;
+}
+
+#main .new dd {
+	float: left;
+	width: 632px;
+}
+
+#main .new dd img {
+	vertical-align: middle;
+}
+
+/*IE6用*/
+*html #main .new dd img {
+	margin-top:0.5em;
+	vertical-align: baseline;
+}
+
+
+
+/*メインコンテンツ
+---------------------------------------------------------------------------*/
+#main {
+	clear: left;
+	width: 772px;		/*メインコンテンツ幅*/
+	padding-top: 30px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/*h2タグ設定*/
+#main h2 {
+	font-size: 120%;	/*文字サイズ*/
+	border-top: 3px double #FFFFFF;		/*上の線の幅、線種、色*/
+	border-bottom: 3px double #FFFFFF;	/*下の線の幅、線種、色*/
+	background-image: url(images/title_bg1.jpg);	/*背景画像*/
+	background-repeat: no-repeat;					/*背景画像をリピートしない*/
+	background-position: right center;				/*背景画像を右側、上下中央に表示*/
+	padding: 10px;	/*余白*/
+	background-color: #191919;	/*背景色*/
+}
+
+/*段落タグの余白設定*/
+#main p {
+	padding: 0.5em 10px 1em;
+}
+
+
+
+/*フッター
+---------------------------------------------------------------------------*/
+#footer {
+	text-align: center;	/*中のテキストをセンタリング*/
+	clear: both;
+	width: 100%;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+/*フッター内にリンク設定した場合用*/
+#footer a {
+	text-decoration: none;
+}
+
+
+
+/*テーブル１
+---------------------------------------------------------------------------*/
+.ta1 {
+	width: 772px;
+}
+
+.ta1, .ta1 td, .ta1 th{
+	border: 1px solid #FFFFFF;	/*枠線の幅と線種と色*/
+}
+
+/*テーブル内の右側*/
+.ta1 td{
+	width: 529px;				/*幅*/
+	padding: 10px;	/*テーブル内の余白*/
+}
+
+/*テーブル内の左側の見出し部分*/
+.ta1 th{
+	width: 200px;				/*幅*/
+	padding: 10px;	/*テーブル内の余白*/
+	text-align: center;			/*文字をセンタリング*/
+	background-color: #191919;	/*背景色*/
+}
+
+/*テーブル１行目に入った見出し部分*/
+.ta1 th.tamidashi{
+	width: auto;
+	text-align: left;
+	background-color: #FFF100;	/*背景色*/
+	color: #000000;				/*文字色*/
+}
+
+/*テーブル１行目に入った見出し部分にリンクを設定した場合用*/
+.ta1 th.tamidashi a {
+	color: #FFFFFF;
+}
+
+
+
+
+/*その他
+---------------------------------------------------------------------------*/
+.look {
+	background-color: #333333;
+}
+
+.mb1em {
+	margin-bottom: 1em;
+}
+
+.clear {
+	clear: both;
+}
+
+ul.disc {
+	padding: 0.5em 10px 0.5em 25px;
+	list-style: disc;
+}
+
+.color1 {
+	color: #FF0000;
+}
+
+.name{
+	text-align: center;
+	font-size:16px;
+	font-weight:bold;
+}
+.title{
+	font-size:16px;
+	font-weight:bold;
+}

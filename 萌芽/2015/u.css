@@ -1,0 +1,87 @@
+body{
+	margin: 0px;
+	font-family: 'Meiryo';
+}
+
+h1{
+	margin: 0px;
+}
+
+header{
+	z-index: 100;
+	width: 100%;
+	padding: 5px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+}
+
+header a{
+	color: #fff;
+	text-decoration: none;
+	padding: 0px 10px;
+}
+
+header a:hover{
+	color: #ff0099;
+}
+
+td{
+	text-align: center;
+	padding-right: 20px;
+}
+
+.wrapper{
+	width: 960px;
+	padding: 4px 10px;
+	background: #fafafa;
+}
+
+.wrapper a{
+	color: #ff0099;
+	text-decoration: underline;
+}
+
+.wrapper a:hover{
+	color: #000;
+	text-decoration: none;
+}
+
+.content{
+	padding-left: 20px;
+}
+
+.centering{
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.h-img-wrapper{
+	position: relative;
+	width: 100%;
+}
+
+.h-img-wrapper img{
+	width: 100%;
+}
+
+.h-img-wrapper h1{
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	display: block;
+	text-align: center;
+	margin: 0px;
+	color: #fff;
+	text-shadow:
+	0px 0px 30px #000,
+	0px 0px 30px #000,
+	0px 0px 30px #000,
+	0px 0px 30px #000,
+	0px 0px 30px #000,
+	0px 0px 30px #000;
+	font-weight: normal;
+	font-size: 2.2em;
+}

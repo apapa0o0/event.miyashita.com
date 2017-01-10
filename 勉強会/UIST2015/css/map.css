@@ -1,0 +1,22 @@
+.map_wrapper {
+  max-width: 640px;
+  min-width: 280px;
+  margin: 20px auto;
+  padding: 4px;
+  border: 1px solid #CCC;
+}
+
+.googlemap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.googlemap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}

@@ -1,0 +1,56 @@
+body{margin:0; padding:0}
+#canvas{margin:0; padding:0; background-color:#111111}
+#main{
+position: absolute; top:0px;left:0px; z-index: 1;
+color: #ffffff;
+}
+#maplink{
+position: absolute; top:1490px;left:1150px; z-index: 2;
+}
+#sensact{
+position: absolute; top:1770px;left:1130px; z-index: 2;
+}
+div#gaiyoulink{
+position: absolute; top:1267px;left:531px; width:139px; height:45px; z-index: 2;background-color: #111111;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#gaiyoulink:hover{
+border:10px solid #111111;
+background-color: #007a7a;
+}
+div#programlink{
+position: absolute; top:1267px;left:761px; width:159px; height:45px; z-index: 2;background-color: #111111;
+
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#programlink:hover{
+border:10px solid #111111;
+background-color: #007a7a;
+}
+div#naiyoulink{
+position: absolute; top:1267px;left:991px; width:139px; height:45px; z-index: 2;background-color: #111111;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#naiyoulink:hover{
+border:10px solid #111111;
+background-color: #007a7a;
+}
+div#miyashitalablink{
+position: absolute; top:1267px;left:1221px; width:159px; height:45px; z-index: 2;background-color: #111111;
+opacity:0.20;
+border:10px dotted #007a7a;
+-webkit-transition: background-color 0.5s linear, border 0.5s linear;
+cursor: pointer;
+}
+#miyashitalablink:hover{
+border:10px solid #111111;
+background-color: #007a7a;
+}

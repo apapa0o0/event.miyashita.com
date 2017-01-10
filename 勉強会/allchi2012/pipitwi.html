@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+	<meta charset="UTF-8" />
+	<title>All.CHI：第7回CHI'12勉強会</title>
+	<link rel="stylesheet" type="text/css" media="all" href="css/all.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.page-scroller.js"></script>
+	<script type="text/javascript" src="js/tab_change.js"></script>
+	<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<meta property="og:title" content="All.CHI：第7回CHI'12勉強会" />
+	<meta property="og:type" content=website />
+	<meta property="og:url" content="http://event.miyashita.com/勉強会/altchi2012/" />
+	<meta property="og:image" content="http://event.miyashita.com/勉強会/altchi2012/img/logo.png" />
+	<meta property="og:site_name" content="All.CHI：第7回CHI'12勉強会" />
+	<meta property="og:description" content="今年で7回目となるCHI勉強会は，全貌を把握することが困難なCHIの会議内容を把握するための勉強会です． 参加者同士で協力し，CHI2012の全論文を1論文30秒（発表者が気に入ったものは1分）で紹介していきます．参加することで，全体を把握できるだけでなく，興味のある論文を確認することがきます．" />
+	<LINK REL="canonical" HREF="http://event.miyashita.com/勉強会/altchi2012/">
+</head>
+
+<body>
+  <div id="fb-root"></div>
+
+<div id="container"> <!--container-->
+
+<!--MENU-->
+<div id="header">
+<dl id="top"></dl><br />
+<div id="logo"><a href="./"><img src="img/chi12.png" alt="第7回CHI'12勉強会"></a></div>
+
+<div id="social">
+<script type="text/javascript" src="js/social.js"></script>
+<div class="fb-like" data-href="http://event.miyashita.com/勉強会/altchi2012/" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://event.miyashita.com/勉強会/altchi2012/" data-text="第7回 CHI'12勉強会">Tweet</a>
+</div>
+</div>
+
+
+<div id="contents">
+
+<div id="header_yaji">
+<a href="./"><img src="img/hidari.png" alt="go to back"></a>
+</div>
+
+
+<!--PIPITWI Contents-->
+<div class="sub_title">ぴぴつい連携概要</div>
+<div class="sub_contents">
+お手本スライドでは、<br />
+<br />
+・タイトル「Making Muscle-Computer Interfaces More Practical」<br />
+・本文2行「上腕二頭筋の筋電を解析し、指に力を入れるジェスチャを認識する研究を小型軽量化」「ユーザスタディで実用性を検証」<br />
+<br />
+が抽出され、以下の2ツイートが生成されます。<br />
+<br />
+<div class="blockquote">
+#allchi [1]Making Muscle-Computer Interfaces More Practical<br />
+#allchi [1]上腕二頭筋の筋電を解析し、指に力を入れるジェスチャを認識する研究を小型軽量化/ユーザスタディで実用性を検証
+</div>
+<br />
+自分でツイート内容を編集したい場合は、スライドの発表者コメント欄に次のようなタグを書き込む必要があります。<br />
+<br />
+<div class="blockquote">
+&lt;twitter&gt;
+<br />pp_twi:#allchi Making Muscle-Computer Interfaces More Practical<br />
+pp_twi:#allchi UIST2009で発表されたMuscle-Computer Interface（上腕二頭筋の筋電を解析し、指に力を入れるジェスチャを認識する）を小型軽量化、ユーザスタディで実用性をしっかり検証<br />
+&lt;/twitter&gt;
+</div>
+<br />
+この内容が書き込まれていた場合、ツイートは自動生成されず、次のようにつぶやかれます。<br />
+<br />
+<div class="blockquote">
+#allchi Making Muscle-Computer Interfaces More Practical<br />
+#allchi UIST2009で発表されたMuscle-Computer Interface（上腕二頭筋の筋電を解析し、指に力を入れるジェスチャを認識する）を小型軽量化、ユーザスタディで実用性をしっかり検証
+</div>
+<br />
+<img src="img/pipi.jpeg" alt="スライド例" width="768">
+</div>
+
+<div class="sub_title">ツイート自動生成の仕様</div>
+<div class="sub_contents">
+・先頭に#allchiがつく<br />
+・タイトルで1 tweet（140文字以降は切り捨て）<br />
+・メイン説明箇条書きで1 tweet（140文字以降は切り捨て）<br />
+　・改行は"/"に置き換える。<br />
+・タイトルと箇条書きをひもづけるため、スライド番号で通し番号がつく。（サーバ遅延とかでtweetの順番が入れ替わっても大丈夫なように。）<br />
+<br />
+PowerPointではテキストボックスが設置した順番にインデックスを持っており、ぴぴついではインデックス0と1のボックスをそれぞれタイトルとメイン説明として扱っているそうです。（著者名のボックスは後から追加して上に動かしたのでインデックス2です。）<br />
+<br />
+お手本スライドをコピペして使わなかった場合、インデックスがずれて、ぴぴついが誤動作を起こす可能性があるのでなるべく避けてください。<br />
+</div>
+
+
+
+
+<div id="footer_yaji">
+<a href="#top"><img src="img/ue.png" alt="go to top"></a>
+</div>
+<div id="footer">
+Copyright © 2012. <a href="http://miyashita.com/" target="_blank">Miyashita Lab.</a> All Rights Reserved.<br />
+Designed by <a href="http://yopita.com/" target="_blank">yopita.</a>
+</div>
+
+</div>
+</div>
+</body>
+</html>

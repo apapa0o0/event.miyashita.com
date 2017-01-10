@@ -1,0 +1,788 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>5th Anniversary</title>
+<link rel="stylesheet" href="css/layout.css" type="text/css" />
+<script type="text/javascript" src="smartphone.js"></script>
+<script>
+	var color = "rgba(0,100,100,0.02)";
+	var tmpx=0;
+	var tmpy=0;
+	var mainwidth=960;
+	var mainheight=5900;
+	var mainleft=0;
+	var maincenter=0;
+	var tmpwidth = 0;
+	var kkk=0;
+	var FW = function(x,y,n) {
+		this.x = x;
+		this.y = y;
+		this.n = n;
+		this.num = 0;
+		this.count = 0;
+		this.state = 0;
+		this.end = Math.floor(Math.random() * 200)+100;
+		this.setoff = function() {
+			for(var i=0;i<tile.length;i++) {
+				if((Math.pow((this.x-(tile[i].x)),2)+Math.pow((this.y-(tile[i].y)),2))<500) {
+					this.num = i;
+					this.state = 1;
+					break;
+				}
+			}
+		};
+		this.fireworks = function() {
+			if(this.state == 1) {
+				this.count = (this.count+1)%this.num;
+				tile[this.num-this.count].flag = 1;
+				if(tile[this.num-this.count].y<this.end) {
+					this.state = 2;
+					//alert(""+tile[this.count].y+":"+this.end);
+					//fw.splice(this.n,1);
+				}
+			}
+			if(this.state >10) {
+				fw.splice(this.n,1);
+			}
+			else if(this.state >7) {
+				this.state++;
+				tile[this.num-this.count-4].flag = 1;
+				tile[this.num-this.count+8].flag = 1;
+				if(this.num-this.count-repeatnum*2 > 0) {
+					tile[this.num-this.count-repeatnum*2-2].flag = 1;
+					tile[this.num-this.count-repeatnum*2+6].flag = 1;
+					if(this.num-this.count-repeatnum*4 > 0) {
+						tile[this.num-this.count-repeatnum*4].flag = 1;
+						tile[this.num-this.count-repeatnum*4+4].flag = 1;
+						if(this.num-this.count-repeatnum*6 > 0) {
+							tile[this.num-this.count-repeatnum*6+2].flag = 1;
+						}
+					}
+				}
+				tile[this.num-this.count+repeatnum*2-2].flag = 1;
+				tile[this.num-this.count+repeatnum*2+6].flag = 1;
+				tile[this.num-this.count+repeatnum*4].flag = 1;
+				tile[this.num-this.count+repeatnum*4+4].flag = 1;
+				tile[this.num-this.count+repeatnum*6+2].flag = 1;
+			}
+			else if(this.state >4) {
+				this.state++;
+				tile[this.num-this.count-2].flag = 1;
+				tile[this.num-this.count+6].flag = 1;
+				if(this.num-this.count-repeatnum*2 > 0) {
+					tile[this.num-this.count-repeatnum*2].flag = 1;
+					tile[this.num-this.count-repeatnum*2+4].flag = 1;
+					if(this.num-this.count-repeatnum*4 > 0) {
+						tile[this.num-this.count-repeatnum*4+2].flag = 1;
+					}
+				}
+				tile[this.num-this.count+repeatnum*2].flag = 1;
+				tile[this.num-this.count+repeatnum*2+4].flag = 1;
+				tile[this.num-this.count+repeatnum*4+2].flag = 1;
+			}
+			else if(this.state >1) {
+				this.state++;
+				if(tile[this.num-this.count].x < tile[this.num-this.count+1].x) {
+					if(this.num-this.count-repeatnum*2 > 0) {
+						tile[this.num-this.count-repeatnum*2+1].flag = 1;
+						tile[this.num-this.count-repeatnum*2+3].flag = 1;
+					}
+				} else {
+					tile[this.num-this.count+repeatnum*2+1].flag = 1;
+					tile[this.num-this.count+repeatnum*2+3].flag = 1;
+				}
+				tile[this.num-this.count].flag = 1;
+				tile[this.num-this.count+1].flag = 1;
+				tile[this.num-this.count+3].flag = 1;
+				tile[this.num-this.count+4].flag = 1;
+				if(this.num-this.count-repeatnum*2 > 0) {
+					tile[this.num-this.count-repeatnum*2+2].flag = 1;
+				}
+				tile[this.num-this.count+repeatnum*2+2].flag = 1;
+			}
+		};
+	}
+
+
+	var Tile = function(x,y,size,nn) {
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.alpha = 0.0;
+		this.flag = 0;
+		this.flag2 = 1;
+		this.count = nn;
+		this.check = function() {
+			if((Math.pow((mouseX-(this.x)),2)+Math.pow((mouseY-(this.y)),2))<500) {
+				if(this.flag<=0 && this.flag2>0) {
+					this.flag=1;
+				}
+				this.flag2=0;
+			}
+			else {
+				if((Math.pow((mouseX-(this.x)),2)+Math.pow((mouseY-(this.y)),2))<1450) {
+					if(this.flag==0 && this.flag2==1) {
+						this.flag = -1;
+					}
+					this.flag2=2;
+				}else {
+					this.flag2=1;
+				}
+			}
+			if(this.flag==-1) {
+				this.draw();
+				if(this.alpha > 0.03) {
+					this.flag=-2;
+				}else {
+					this.alpha += 0.005;
+				}
+			}
+			else if(this.flag<-50) {
+				this.draw();
+				this.alpha -= 0.004;
+				if(this.alpha < 0) {
+					this.flag=0;
+					this.alpha=0;
+				}
+			}
+			else if(this.flag<-1) {
+				this.draw();
+				this.flag--;
+			}
+			if(this.flag==1) {
+				this.draw();
+				if(this.alpha > 0.1) {
+					this.flag=2;
+				}else {
+					this.alpha += 0.005;
+				}
+			}
+			else if(this.flag>30) {
+				this.draw();
+				this.alpha -= 0.004;
+				if(this.alpha < 0) {
+					this.flag=0;
+					this.alpha=0;
+				}
+			}
+			else if(this.flag>1) {
+				this.draw();
+				this.flag++;
+			}/*
+			context.font = '10px "Arial Black"';
+			context.fillStyle = "rgb(28,45,55)";
+	    	context.fillText(""+this.count, this.x,this.y);*/
+		};
+		this.draw = function() {
+			context.fillStyle = 'rgba(0,128,128,'+ this.alpha +')';
+			context.beginPath();
+			context.moveTo(this.x,this.y-size/2);
+			context.lineTo(this.x+size/2,this.y);
+			context.lineTo(this.x,this.y+size/2);
+			context.lineTo(this.x-size/2,this.y);
+			context.closePath();
+			context.fill();
+		};
+	}
+
+
+	var count = 0;
+	var firecount = 0;
+	var size = 40;
+	var margin = 6;
+	var mouseX = 0;
+	var mouseY = 0;
+/*
+	var num=9800;
+	var repeatnum=Math.sqrt(num/2);
+	tile = new Array(num);
+	var fw = new Array(1);
+	fw[0] = new FW(100,100);
+	for(var i=0;i<repeatnum;i++) {
+		for(var j=0;j<repeatnum;j++) {
+			tile[count]= new Tile(i*(size+margin),j*(size+margin),size,count);
+			count++;
+			tile[count]= new Tile(i*(size+margin)+(size+margin)/2,j*(size+margin)+(size+margin)/2,size,count);
+			count++;
+
+		}
+	}
+*/
+	count=0;
+	var topimg = new Image();
+	var titlebg = new Image();
+	var aisatsubg = new Image();
+	var categorybg = new Image();
+	var footer = new Image();
+	var titlelogo = new Image();
+	var member07 = new Image();
+	var member08 = new Image();
+	var member09 = new Image();
+	var member10 = new Image();
+	var member11 = new Image();
+	var kxh = new Image();
+	var kaijou = new Image();
+	var ikutamap = new Image();
+
+	window.onload = function () {
+		init();
+	}
+	function init(){
+		canvas = document.getElementById('canvas')
+		context = canvas.getContext('2d');
+		context.globalAlpha = 0;
+		SCREEN_WIDTH = window.innerWidth;
+		SCREEN_HEIGHT = window.innerHeight;
+		canvas.width=SCREEN_WIDTH-18;
+		canvas.height=mainheight;
+		mainleft=SCREEN_WIDTH/2-mainwidth/2;
+		maincenter=SCREEN_WIDTH/2;
+		rectposx = mainleft/(size+margin)<<0;
+		context.shadowOffsetX = 2;
+		context.shadowOffsetY = 2;
+		context.shadowBlur = 7;
+		canvas.addEventListener('mousemove',MouseMove,false);
+		/* 画像が読み込まれるのを待ってから処理を続行 */
+		topimg.src = "top.jpg?" + new Date().getTime();
+		topimg.onload = function() { context.drawImage(topimg, 70, 2000);
+
+setImg(1);}
+		//titlebg.src = "titlebg.png?" + new Date().getTime();
+		//titlebg.onload = function() { context.drawImage(titlebg, 70, 2000); }
+		aisatsubg.src = "aisatsubg.png?" + new Date().getTime();
+		aisatsubg.onload = function() { context.drawImage(aisatsubg, 70, 2000); }
+		categorybg.src = "categorybg.png?" + new Date().getTime();
+		categorybg.onload = function() { context.drawImage(categorybg, 70, 2000); }
+		footer.src = "footer.png?" + new Date().getTime();
+		footer.onload = function() { context.drawImage(footer, 70, 2000); }
+setImg(1);
+setImg(1);
+setImg(1);
+setImg(1);
+		kaijou.src = "kaijou.png?" + new Date().getTime();
+		kaijou.onload = function() { context.drawImage(kaijou, 70, 2500); }
+		ikutamap.src = "ikutamap.png?" + new Date().getTime();
+		ikutamap.onload = function() { context.drawImage(ikutamap, 70, 2500); }
+/*
+		titlelogo.src = "titlelogo.png?" + new Date().getTime();
+		titlelogo.onload = function() { context.drawImage(titlelogo, 30, 2000); }
+		member07.src = "member07.png?" + new Date().getTime();
+		member07.onload = function() { setImg(7); }
+		member08.src = "member08.png?" + new Date().getTime();
+		member08.onload = function() { setImg(8); }
+		member09.src = "member09.png?" + new Date().getTime();
+		member09.onload = function() { setImg(9); }
+		member10.src = "member10.png?" + new Date().getTime();
+		member10.onload = function() { setImg(10); }
+		member11.src = "member11.png?" + new Date().getTime();
+		member11.onload = function() { setImg(11); }*/
+
+		document.getElementById('maplink').style.left=""+(maincenter-300)+"px";
+		document.getElementById('mlabsmalllink').style.left=""+(maincenter-350)+"px";
+		document.getElementById('sensactsmalllink').style.left=""+(maincenter-350)+"px";
+		document.getElementById('facebooklink').style.left=""+(maincenter-350)+"px";
+		document.getElementById('atndlink').style.left=""+(maincenter-235)+"px";
+		document.getElementById('sensactsmalllink2').style.left=""+(maincenter-140)+"px";
+		document.getElementById('sensactweb').style.left=""+(maincenter-370)+"px";
+		document.getElementById('sensactatnd').style.left=""+(maincenter-400)+"px";
+		document.getElementById('interviews').style.left=""+(maincenter-335)+"px";
+		document.getElementById('sensact').style.left=""+(maincenter+10)+"px";
+		document.getElementById('socialBtns').style.left=""+(maincenter-295)+"px";
+
+		document.getElementById('gaiyoulink').style.left=""+(maincenter-484)+"px";
+		document.getElementById('accesslink').style.left=""+(maincenter-315)+"px";
+		document.getElementById('sensactlink').style.left=""+(maincenter-145)+"px";
+		document.getElementById('programlink').style.left=""+(maincenter-15)+"px";
+		document.getElementById('naiyoulink').style.left=""+(maincenter+175)+"px";
+		document.getElementById('miyashitalablink').style.left=""+(maincenter+345)+"px";
+
+		document.getElementById('maplink').style.opacity=0;
+		document.getElementById('sensact').style.opacity=0;
+		document.getElementById('socialBtns').style.opacity=0;
+		document.getElementById('gaiyoulink').style.opacity=0;
+		document.getElementById('programlink').style.opacity=0;
+		document.getElementById('naiyoulink').style.opacity=0;
+		document.getElementById('miyashitalablink').style.opacity=0;
+		setInterval(draw,100);//描画時間
+		//setInterval(setoff,2000);//花火時間
+		fadeid = setInterval(fadeImg,100);//画像フェード用
+	}
+	//マウスの座標取得
+	function MouseMove(e){
+ 		mouseX = e.clientX - (window.innerWidth - SCREEN_WIDTH);
+    	mouseY = e.clientY - (window.innerHeight - SCREEN_HEIGHT-document.body.scrollTop);
+	}
+	//ウィンドウサイズ取得
+	function WindowCheck(){
+		tmpwidth = window.innerWidth;
+		if(imgalpha[5] <= 1) {
+			document.getElementById('maplink').style.opacity=imgalpha[5];
+			document.getElementById('sensact').style.opacity=imgalpha[5];
+			document.getElementById('socialBtns').style.opacity=imgalpha[5];
+			document.getElementById('gaiyoulink').style.opacity=imgalpha[5]*0.2;
+			document.getElementById('accesslink').style.opacity=imgalpha[5]*0.2;
+			document.getElementById('sensactlink').style.opacity=imgalpha[5]*0.2;
+			document.getElementById('programlink').style.opacity=imgalpha[5]*0.2;
+			document.getElementById('naiyoulink').style.opacity=imgalpha[5]*0.2;
+			document.getElementById('miyashitalablink').style.opacity=imgalpha[5]*0.2;
+		}
+		if(tmpwidth != SCREEN_WIDTH) {
+			SCREEN_WIDTH=tmpwidth;
+			canvas.width=SCREEN_WIDTH-18;
+			mainleft=SCREEN_WIDTH/2-mainwidth/2;
+			maincenter=SCREEN_WIDTH/2;
+			rectposx = mainleft/(size+margin)<<0;
+			context.shadowOffsetX = 2;
+			context.shadowOffsetY = 2;
+			context.shadowBlur = 7;
+		document.getElementById('maplink').style.left=""+(maincenter-200)+"px";
+		document.getElementById('mlabsmalllink').style.left=""+(maincenter-350)+"px";
+		document.getElementById('sensactsmalllink').style.left=""+(maincenter-350)+"px";
+		document.getElementById('facebooklink').style.left=""+(maincenter-350)+"px";
+		document.getElementById('atndlink').style.left=""+(maincenter-235)+"px";
+		document.getElementById('sensactsmalllink2').style.left=""+(maincenter-140)+"px";
+		document.getElementById('sensactweb').style.left=""+(maincenter-370)+"px";
+		document.getElementById('sensactatnd').style.left=""+(maincenter-400)+"px";
+		document.getElementById('interviews').style.left=""+(maincenter-335)+"px";
+		document.getElementById('sensact').style.left=""+(maincenter+10)+"px";
+		document.getElementById('socialBtns').style.left=""+(maincenter-295)+"px";
+
+		document.getElementById('gaiyoulink').style.left=""+(maincenter-484)+"px";
+		document.getElementById('accesslink').style.left=""+(maincenter-315)+"px";
+		document.getElementById('sensactlink').style.left=""+(maincenter-145)+"px";
+		document.getElementById('programlink').style.left=""+(maincenter-15)+"px";
+		document.getElementById('naiyoulink').style.left=""+(maincenter+175)+"px";
+		document.getElementById('miyashitalablink').style.left=""+(maincenter+345)+"px";
+
+		}
+	}
+	function setoff() {
+		n = Math.floor(Math.random() * SCREEN_WIDTH);
+		fw[fw.length]= new FW(n,SCREEN_HEIGHT,(fw.length-1));
+		fw[(fw.length-1)].setoff();
+	}
+	function fireworksmain() {
+		firecount++;
+		if(firecount%5==0) {
+			for(var i=1;i<fw.length;i++) {
+				fw[i].fireworks();
+			}
+		}
+	}
+	function rectimgposx(x,y) {
+		return (rectposx+x)*(size+margin)-(size+margin)/2*(y%2)+3;
+	}
+	function rectimgposy(y) {
+		return y*(size+margin)/2+3;
+	}
+	function gaiyou() {
+		window.scroll(0, gaiyouposy-50);
+	}
+	function accessli() {
+		window.scroll(0, accessposy-50);
+	}
+	function sensactli() {
+		window.scroll(0, sensactposy-50);
+	}
+	function program() {
+		window.scroll(0, progposy-50);
+	}
+	function naiyou() {
+		window.scroll(0, naiyouposy-50);
+	}
+
+	imgalpha = new Array();
+	for(var i=0;i<6;i++) {
+		imgalpha[i]=0;
+	}
+	fadecount = 5;
+	function fadeImg() {
+		if (fadecount == 0) return;
+		for(i=0; i<fadecount; i++) {
+			if (imgalpha[i] < 1) imgalpha[i] += 0.2;
+			if(fadecount == 5 && imgalpha[4] >= 1) {
+				fadecount++;
+			}
+			if(fadecount == 6 && imgalpha[5] >= 1) {
+				clearInterval(fadeid);
+			}
+		}
+	}
+	function setImg(n) {
+		imgalpha[fadecount++] = 0.8;
+	}
+
+
+	//メインループ
+	function draw() {
+		WindowCheck();
+		context.clearRect(0,0,SCREEN_WIDTH,mainheight); //再描画させるために、とりあえず消す
+		/*for(var i=0;i<num;i++) {
+			tile[i].check();
+		}*/
+		//fireworksmain();
+		if(imgalpha[4] >= 1 || true) {
+			context.globalAlpha = imgalpha[5];
+			context.fillStyle = 'rgba(0,100,100,'+ 0.2 +')';
+			context.shadowColor = "rgba(0,0,0,0)";
+			context.drawImage(titlebg, rectimgposx(-2,0),rectimgposy(0));
+			// context.drawImage(aisatsubg, rectimgposx(-2,0),rectimgposy(37));
+			// context.drawImage(categorybg, rectimgposx(-1,1),rectimgposy(59));
+			// context.drawImage(categorybg, rectimgposx(-1,1),rectimgposy(85));
+			// context.drawImage(categorybg, rectimgposx(-1,1),rectimgposy(124));
+			// context.drawImage(categorybg, rectimgposx(-1,1),rectimgposy(146));
+			// context.drawImage(categorybg, rectimgposx(-1,1),rectimgposy(173));
+			// context.drawImage(categorybg, rectimgposx(-1,1),rectimgposy(226));
+			// context.drawImage(footer, rectimgposx(-10,1),rectimgposy(250));
+			//context.drawImage(titlelogo, mainleft, 70);
+			context.drawImage(topimg, mainleft-100, 0);
+
+			context.shadowColor = "rgba(0,0,0,0)";
+		    context.textAlign = "center";
+			var textfont = 16;
+			var aisatsuposy = 890;
+			context.font = ''+textfont+'px "メイリオ"';
+			context.fillStyle = "rgb(28,45,55)";
+		    context.fillText("2007年に立ち上がった宮下研究室は", maincenter, aisatsuposy);
+		    context.fillText("皆様に支えられ，このたび5周年を迎えることができました．", maincenter, aisatsuposy+(textfont+margin));
+		    context.fillText("この節目の時期に研究室の活動を振り返り", maincenter, aisatsuposy+(textfont+margin)*3);
+		    context.fillText("今だからこそ公開できる研究室運営の工夫から将来に向けてのビジョンまで，話せる場を企画しました．", maincenter, aisatsuposy+(textfont+margin)*4);
+		    context.fillText("また，宮下研究室では「ヒューマン・コンテンツ インタラクション」のコンセプトのもとに", maincenter, aisatsuposy+(textfont+margin)*6);
+		    context.fillText("人間がコンテンツを生み出し，また享受するための新しいメディアを多く開発してまいりました．", maincenter, aisatsuposy+(textfont+margin)*7);
+		    context.fillText("今回はオープンラボも企画し", maincenter, aisatsuposy+(textfont+margin)*9);
+		    context.fillText("「SeekRopes」「不可能立体CG」「サンプリング書道」「スイッチバックカーソル」「ＭＡＥＤＥ」", maincenter, aisatsuposy+(textfont+margin)*11);
+			context.fillText("といった過去の研究成果の体験に加え，最新の研究成果にも触れていただくことができます．", maincenter, aisatsuposy+(textfont+margin)*13);
+			context.fillText("  是非，お気軽にお立ち寄り下さい．", maincenter, aisatsuposy+(textfont+margin)*15);
+
+			var menuposy = 1310;
+			var menufont = 28;
+		    context.textAlign = "center";
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillStyle = "rgb(28,45,55)";
+/*
+		document.getElementById('gaiyoulink').style.left=""+(maincenter-484)+"px";
+		document.getElementById('accesslink').style.left=""+(maincenter-315)+"px";
+		document.getElementById('sensactlink').style.left=""+(maincenter-145)+"px";
+		document.getElementById('programlink').style.left=""+(maincenter-15)+"px";
+		document.getElementById('naiyoulink').style.left=""+(maincenter+175)+"px";
+		document.getElementById('miyashitalablink').style.left=""+(maincenter+345)+"px";*/
+
+			context.fillText("祭典概要",maincenter-405,menuposy);
+			context.fillText("アクセス",maincenter-235,menuposy);
+			context.fillText("共催",maincenter-85,menuposy);
+			context.fillText("プログラム",maincenter+75,menuposy);
+			context.fillText("詳細内容",maincenter+255,menuposy);
+			context.fillText("宮下研究室",maincenter+435,menuposy);
+
+		    context.textAlign = "left";
+			var gaiyouposx = maincenter-430;
+			gaiyouposy = 1430;
+			var gaiyoufont = 16;
+			var gaiyoumargin = 6;
+			context.fillStyle = "rgb(28,45,55)";
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillText("祭典概要",maincenter-480,gaiyouposy);
+			context.font = ''+gaiyoufont+'px "メイリオ"';
+			context.fillText("●日時：　2012/04/21 13:00 to 16:00",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*4);
+			context.fillText("●会場：　明治大学　生田校舎 A館401教室（神奈川県川崎市多摩区東三田1-1-1 ）",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*6);
+			context.fillText("●主催：　",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*8);
+			context.fillText("   共催：　",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*9);
+			context.fillText("●概要：　宮下研の５周年を振り返り，未来を話す会",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*11);
+			context.fillText("                宮下研OBや在学生による発表はもちろん，",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*12);
+			context.fillText("                宮下研に関係のあるゲストによる発表もあります．",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*13);
+			context.fillText("                さらに研究成果を実際にさわって体験していただける",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*14);
+			context.fillText("                インタラクティブセッションもご用意いたしました．",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*15);
+			context.fillText("●Let's tweet!:                         公式ハッシュタグ：#宮下研５周年祭",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*17);
+			context.fillText("●告知：　                 ＆",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*19);
+			context.fillText("●同日開催：テクノロジトークイベント                     A館417教室 16:00～",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*21);
+			context.fillText("●質問募集：",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*23);
+			context.fillStyle = "rgb(198,85,25)";
+			context.fillText("                明治大学　宮下研究室",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*8);
+			context.fillText("                テクノロジトークイベント\"SENSACT\"",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*9);
+			context.fillText("                facebook　   　ATND",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*19);
+			context.fillText("                                                          \"SENSACT\"",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*21);
+			context.fillText("                   THE INTERVIEWS miyashita_lab",gaiyouposx,gaiyouposy+(gaiyoufont+gaiyoumargin)*23);
+
+
+		    context.textAlign = "left";
+			var accessposx = maincenter-450;
+			accessposy = 2020;
+			var accessfont = 14;
+			var accessmargin = 6;
+			context.fillStyle='rgb(46,46,46)';
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillText("アクセス",maincenter-480,accessposy);
+			context.drawImage(ikutamap, accessposx, accessposy+300);
+
+
+
+
+		    context.textAlign = "left";
+			var sensactposx = maincenter-450;
+			sensactposy = 2920;
+			var sensactfont = 14;
+			var sensactmargin = 6;
+			context.fillStyle='rgb(46,46,46)';
+			context.fillRect(mainleft,sensactposy+100,mainwidth+40,290);
+			context.font = ''+textfont+'px "メイリオ"';
+			context.fillText("宮下研究室の５周年記念イベントは，SENSACTと共催です．会場にお越しの際に，ぜひこちらもあわせてお楽しみください！",sensactposx,sensactposy+(sensactfont+sensactmargin)*4);
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillText("【共催】　テクノロジトークイベント \"SENSACT\"",maincenter-480,sensactposy);
+			context.fillStyle = "rgb(238,238,238)";
+			context.font = ''+sensactfont+'px "メイリオ"';
+			context.fillText("SENSACT Vol.1のテーマは「フォトリフレクタ」です．",sensactposx,sensactposy+(sensactfont+sensactmargin)*7);
+			context.fillText("フォトリフレクタはLEDと光センサが組になったデバイスです． ",sensactposx,sensactposy+(sensactfont+sensactmargin)*8);
+			context.fillText("対象物からの反射光を読み取ることによって，さまざまな",sensactposx,sensactposy+(sensactfont+sensactmargin)*9);
+			context.fillText("物理量を計測することができます． フォトリフレクタは実に",sensactposx,sensactposy+(sensactfont+sensactmargin)*10);
+			context.fillText("いろいろなところで使われています．物体の有無や接触状態の",sensactposx,sensactposy+(sensactfont+sensactmargin)*11);
+			context.fillText("センシングから，指先脈波や皮膚運動などの生体センシングに",sensactposx,sensactposy+(sensactfont+sensactmargin)*12);
+			context.fillText("至るまで， 非常に応用の幅が広いのが特徴です． ",sensactposx,sensactposy+(sensactfont+sensactmargin)*13);
+			context.fillText("今回はフォトリフレクタの面白い使い方をしている人をゲストとして",sensactposx,sensactposy+(sensactfont+sensactmargin)*14);
+			context.fillText("お招きし，フォトリフレクタの万能ぶりについて熱く語ります！",sensactposx,sensactposy+(sensactfont+sensactmargin)*15);
+			context.fillText("公式サイト　http://kougaku-navi.net/sensact",sensactposx,sensactposy+(sensactfont+sensactmargin)*17);
+			context.fillText("ATND　http://atnd.org/events/27026",sensactposx,sensactposy+(sensactfont+sensactmargin)*18);
+
+
+		    context.textAlign = "left";
+			var progposx = maincenter-310;
+			progposy = 3430;
+			var progfont = 16;
+			var progmargin = 6;
+			context.fillStyle = "rgb(28,45,55)";
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillText("プログラム",maincenter-480,progposy);
+			context.font = 'bold '+gaiyoufont+'px "メイリオ"';
+			context.fillText("13:00 - 14:00        インタラクティブセッション　 (インタラクティブ隊長：B4 大島裕樹)",progposx-70,progposy+(progfont+progmargin)*4);
+			context.fillText("14:00 -                   登壇セッション　 (座長：M1 嶋本諒太　　チャット座長：B4 大家眸美)",progposx-70,progposy+(progfont+progmargin)*6);
+			context.font = ''+gaiyoufont+'px "メイリオ"';
+			context.fillText("M2 中橋雅弘       宮下研徹底分析",progposx+80,progposy+(progfont+progmargin)*8);
+			context.fillText("M2 松岡拓人       これからの宮下研",progposx+80,progposy+(progfont+progmargin)*10);
+			context.fillText("B4 井川洋平       宮下研とABPro",progposx+80,progposy+(progfont+progmargin)*12);
+			context.fillText("宮下芳明        宮下研究室 エピソード0",progposx+107,progposy+(progfont+progmargin)*14);
+			context.fillText("                 　 　～特別降臨～ 　 ",progposx,progposy+(progfont+progmargin)*16);
+			context.fillText("西本一志（北陸先端科学技術大学院大学）",progposx+107,progposy+(progfont+progmargin)*17);
+			context.fillText("   	～お祝いメッセージ～",progposx+104,progposy+(progfont+progmargin)*19);
+			context.fillText("中村聡史 (京都大学)",progposx+107,progposy+(progfont+progmargin)*20);
+			context.fillText("園山隆輔 (T-D-F代表)",progposx+107,progposy+(progfont+progmargin)*21);
+			context.fillText("栗原一貴（産業技術総合研究所）",progposx+107,progposy+(progfont+progmargin)*22);
+
+
+
+
+			context.fillText("宮下芳明        宮下研の教育について",progposx+107,progposy+(progfont+progmargin)*24);
+			context.font = 'bold '+gaiyoufont+'px "メイリオ"';
+			context.fillText("インタラクティブセッション再び + ラボツアー",progposx+87,progposy+(progfont+progmargin)*26);
+
+		    context.textAlign = "center";
+			var naiyouposx = maincenter-350;
+			naiyouposy = 4050;
+			var naiyoufont = 16;
+			var naiyoumargin = 6;
+			context.fillStyle = "rgb(28,45,55)";
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillText("詳細内容",maincenter-420,naiyouposy);
+
+			// context.drawImage(kaijou, naiyouposx-150, naiyouposy+70);
+
+
+
+		    context.textAlign = "left";
+			var uneiposx = maincenter-350;
+			var nameposx = 190;
+			uneiposy = 5265;
+			var uneifont = 15;
+			var uneimargin = 6;
+			var namecount = 0;
+			var namebase = 6;
+			var tonari = 0;
+			context.fillStyle = "rgb(28,45,55)";
+			context.font = ''+menufont+'px "メイリオ"';
+			context.fillText("5th Aniv. 運営委員会",maincenter-460,uneiposy);
+			context.font = ''+uneifont+'px "メイリオ"';
+
+			tonari=-200;
+			context.fillText("運営委員長",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M2 松岡 拓人",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("受付・ラウンジパンダ担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("D3 中村 美惠子",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("sensact連携担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("D2 中村 裕美",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("twitter実況担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M2 太田 佳敬",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("Webサイト担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M2 中橋 雅弘",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("ラウンジパンダ担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M2 馬場 さおり",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("神",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M2 山中 祥太",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("サポート",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 榊原 絵里",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+
+			namecount = 0;
+			tonari=200;
+			namecount += 2;
+			context.fillText("登壇座長",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 嶋本 諒太",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("サポート",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 嶋屋 友佳",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("ラボツアー委員長",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 永瀨 翔",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("MAEDE展示担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 前田 晴己",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("NICOGAZE担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 松野 祐典",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("Teaching Assistants",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("M1 山本 涼太",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("ABPro登壇担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 井川 洋平",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+
+
+
+
+			tonari=600;
+			namecount = 0;
+			context.fillText("インタラクティブ委員長",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 大島 裕樹",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("チャット座長・撮影担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 大家 眸美",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("インタラクティブ説明員",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 加藤 邦拓",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("インタラクティブ説明員",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 黒澤 祐也",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("ブース展示担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 鈴木 悠司",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("インタラクティブ説明員",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 高橋 治輝",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("ブース展示担当",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 貫 貴裕",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			namecount += 2;
+			context.fillText("インタラクティブ説明員",uneiposx+tonari,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+			context.fillText("B4 吉田 有花",uneiposx+tonari+nameposx,uneiposy+(uneifont+uneimargin)*(namecount+namebase));
+
+
+
+			context.textAlign = "center";
+			context.fillStyle = "rgb(28,45,55)";
+			context.font = '12px "メイリオ"';
+			context.fillText("Copyright 2012 Miyashita Lab.",maincenter,mainheight-50);
+			context.font = '10px "メイリオ"';
+			context.fillText("Designed by @The_Lus",maincenter,mainheight-20);
+/*
+			context.globalAlpha = 1;
+			context.shadowColor = "white";
+		    context.textAlign = "left";
+			context.font = '40px "Arial Black"';
+			context.fillStyle = "rgb(54,71,80)";
+			context.textBaseline = "top";
+			photoposy = 330;
+			context.drawImage(member07, mainleft-30, photoposy-180);
+			context.fillText("2007", mainleft-40, photoposy+20);
+			if(imgalpha[1]<0) context.globalAlpha = 0;
+			context.drawImage(member08, mainleft+50, photoposy+30);
+			context.fillText("2008", mainleft, photoposy+170);
+			if(imgalpha[2]<0) context.globalAlpha = 0;
+			context.drawImage(member09, mainleft+300, photoposy-250);
+			context.fillText("2009", mainleft+420, photoposy+95);
+			if(imgalpha[3]<0) context.globalAlpha = 0;
+			context.drawImage(member10, mainleft+560, photoposy+90);
+			context.fillText("2010", mainleft+720, photoposy+350);
+			if(imgalpha[4]<0) context.globalAlpha = 0;
+			context.drawImage(member11, mainleft-50, photoposy+180);
+			context.fillText("2011", mainleft+550, photoposy+450);*/
+		} else {
+/*
+			photoposy = 330;
+			context.shadowColor = "white";
+		    context.textAlign = "left";
+			context.font = '40px "Arial Black"';
+			context.fillStyle = "rgb(54,71,80)";
+			context.textBaseline = "top";
+			photoposy = 330;
+			context.globalAlpha = imgalpha[0];
+			context.drawImage(member07, mainleft-30, photoposy-180);
+			context.fillText("2007", mainleft-40, photoposy+20);
+			context.globalAlpha = imgalpha[1];
+			if(imgalpha[1]<0) context.globalAlpha = 0;
+			context.drawImage(member08, mainleft+50, photoposy+30);
+			context.fillText("2008", mainleft, photoposy+170);
+			context.globalAlpha = imgalpha[2];
+			if(imgalpha[2]<0) context.globalAlpha = 0;
+			context.drawImage(member09, mainleft+300, photoposy-250);
+			context.fillText("2009", mainleft+420, photoposy+95);
+			context.globalAlpha = imgalpha[3];
+			if(imgalpha[3]<0) context.globalAlpha = 0;
+			context.drawImage(member10, mainleft+560, photoposy+90);
+			context.fillText("2010", mainleft+720, photoposy+350);
+			context.globalAlpha = imgalpha[4];
+			if(imgalpha[4]<0) context.globalAlpha = 0;
+			context.drawImage(member11, mainleft-50, photoposy+180);
+			context.fillText("2011", mainleft+550, photoposy+450);*/
+		}
+	}
+</script>
+</head>
+<body>
+
+<!-- Canvasを表示させる場所 -->
+<canvas id="canvas" width="500" height="340"></canvas>
+<div id="maplink">
+<a href="http://www.google.co.jp/maps?q=35.6133932,139.5488427(%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%A4%9A%E6%91%A9%E5%8C%BA%E6%9D%B1%E4%B8%89%E7%94%B01-1-1+)&amp;z=17" target="_blank">
+	<img src="access.png">
+</a>
+</div>
+<div id="sensact">
+<a href="http://kougaku-navi.net/sensact/" target="_blank">
+	<img src="sensacttitle.png">
+</a>
+</div>
+<div id="socialBtns">
+<a href="http://twitter.com/share" class="twitter-share-button" data-text="Miyashita Lab. 5th Anniversary #宮下研５周年祭" data-count="horizontal" data-lang="ja">Tweet</a>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+<div id="kumapan">
+	<img src="head.png">
+</div>
+<div id="kanban1">
+	<img src="kanban1.png">
+</div>
+<div id="kanban2">
+	<a href="http://togetter.com/li/291119"><img src="kanban2.png"></a>
+</div>
+<div id="gaiyoulink" onclick="gaiyou()"></div>
+<div id="accesslink" onclick="accessli()"></div>
+<div id="sensactlink" onclick="sensactli()"></div>
+<div id="programlink" onclick="program()"></div>
+<div id="naiyoulink" onclick="naiyou()"></div>
+<div id="miyashitalablink" onclick="document.location = 'http://www.miyashita.com/';"></div>
+<div id="mlabsmalllink" class="mlink" onclick="document.location = 'http://www.miyashita.com/';"></div>
+<div id="sensactsmalllink" class="mlink" onclick="window.open('http://kougaku-navi.net/sensact/');"></div>
+<div id="sensactsmalllink2" class="mlink" onclick="window.open('http://kougaku-navi.net/sensact/');"></div>
+<div id="sensactweb" class="mlink2" onclick="window.open('http://kougaku-navi.net/sensact/');"></div>
+<div id="sensactatnd" class="mlink2" onclick="window.open('http://atnd.org/events/27026');"></div>
+<div id="facebooklink" class="mlink" onclick="window.open('http://www.facebook.com/events/341012429282010/');"></div>
+<div id="atndlink" class="mlink" onclick="window.open('http://atnd.org/events/27794');"></div>
+<div id="interviews" class="mlink" onclick="window.open('http://theinterviews.jp/miyashita_lab');"></div>
+</body>
+
+</html>

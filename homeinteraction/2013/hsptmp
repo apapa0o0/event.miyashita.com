@@ -1,0 +1,24 @@
+notesel buf
+noteload "twitdata2.txt",10000000
+sdim textdata,2000000
+timecount=0
+repeat notemax
+noteget gyou,cnt
+split gyou,"<img class=\"twttrimg\" src=\"",a,b
+if stat = 2{
+	split b,"alt=",c,d
+	textdata+= "[\'<img class=\"twttrimg\" src=\""+c+"style=\"float: left; padding: 5px;\">"
+}
+split gyou,"<div class=\"tweet\">",a,b
+if stat = 2: textdata+= b+"<br>"
+split gyou,"\"_blank\">2012/02/",a,g
+if stat = 2{
+	split g," ",a,c
+	split c,":",d,e,f
+	textdata+= "2012/02/"+a+" "+d+":"+e+":"+f+"\',"+timecount+"],\n"
+	timecount+=10
+	//textdata+= "2012/02/"+a+" "+d+":"+e+":"+f+"\',"+(((int(a)-8)*24*60*60)+(int(d)-13)*60*60+int(e)*60+int(f))+"],\n"
+}
+loop
+notesel textdata
+notesave "tetetest.js"

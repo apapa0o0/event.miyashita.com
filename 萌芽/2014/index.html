@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<title>萌芽研究発表会２０１４・宮下研究室</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+    <script type="text/javascript" charset="utf-8" src="js/jquery-1.9.1.min.js"></script>
+
+    <style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #bg, #bg table, #bg td, #cont {
+    height:100%;
+    width:100%;
+    overflow:hidden;
+}
+
+#bg {
+    position: fixed;
+}
+
+#bg div {
+    height:200%;
+    left:-50%;
+    position:absolute;
+    top:-50%;
+    width:200%;
+}
+
+#bg td {
+    text-align:center;
+    vertical-align:middle;
+}
+
+#bg img {
+    margin:0 auto;
+    min-height:50%;
+    min-width:50%;
+}
+
+#cont {
+    position:absolute;
+    top:0;left:0;
+    z-index:70;
+    overflow:auto;
+}
+
+.box {
+    margin: 5% 0 5% 15%;
+    width: 60%;
+    padding: 50px;
+    background: white;
+    font: 14px/1.6 arial;
+}
+
+table.sample1 {
+    width: 100%;
+    margin:20px 0px 50px;
+    border-top: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+    border-spacing:0px;
+}
+table.sample1 tr th,table.sample1 tr td {　/*「,（カンマ）」で区切って複数のセレクタを指定しています*/
+    font-size: 12px;
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    padding: 7px;
+}
+table.sample1 tr th {
+    background: #E6EAFF;
+}
+
+#focus-stealer      { position: absolute; left: -9999px; }
+
+    </style>
+
+    <style>
+
+        a {
+            color: #333;
+        }
+
+    a:visited {
+        font-weight: normal;
+    }
+
+    .strong a:visited,
+    a.strong:visited {
+        font-weight: bold;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    body {
+        font-size: 1em;
+        line-height: 1.5em;  /* 16px/24px default */
+        color: #666;
+        background: #fff;
+        background: url('../images/bg.jpg') fixed;
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-weight: 200;
+    }
+
+    /* Container */
+    .modal {
+
+        /* Overlay page content */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 10000;
+
+        /* Transition opacity on open */
+        -webkit-transition: opacity 500ms ease-in;
+        -moz-transition: opacity 500ms ease-in;
+        transition: opacity 500ms ease-in;
+
+        /* Hide for now */
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Show modal */
+    .modal:target {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Content */
+    .modal > div {
+        width: 500px;
+        background: #fff;
+        position: relative;
+        margin: 10% auto;
+
+        /* Default minimise animation */
+        -webkit-animation: minimise 500ms linear;
+
+        /* Prettify */
+        padding: 30px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+        -webkit-box-shadow: 0 3px 20px rgba(0,0,0,0.9);
+        -moz-box-shadow: 0 3px 20px rgba(0,0,0,0.9);
+        box-shadow: 0 3px 20px rgba(0,0,0,0.9);
+        background: -moz-linear-gradient(#fff, #ccc);
+        background: -webkit-gradient(linear, right bottom, right top, color-stop(1, rgb(255,255,255)), color-stop(0.57, rgb(230,230,230)));
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    /* Override animation on modal open */
+    .modal:target > div {
+        -webkit-animation-name: bounce;
+    }
+
+    .modal h2 {
+        font-size: 36px;
+        padding: 0 0 20px;
+    }
+
+    @-webkit-keyframes bounce {
+        0% {
+            -webkit-transform: scale3d(0.1,0.1,1);
+            -webkit-box-shadow: 0 3px 20px rgba(0,0,0,0.9);
+        }
+        55% {
+            -webkit-transform: scale3d(1.08,1.08,1);
+            -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0);
+        }
+        75% {
+            -webkit-transform: scale3d(0.95,0.95,1);
+            -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.9);
+        }
+        100% {
+            -webkit-transform: scale3d(1,1,1);
+            -webkit-box-shadow: 0 3px 20px rgba(0,0,0,0.9);
+        }
+    }
+
+    @-webkit-keyframes minimise {
+        0% {
+            -webkit-transform: scale3d(1,1,1);
+        }
+        100% {
+            -webkit-transform: scale3d(0.1,0.1,1);
+        }
+    }
+
+    /* Modal close link */
+    .modal a[href="#close"] {
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: transparent;
+    }
+
+    /* Reset native styles */
+    .modal a[href="#close"]:focus {
+        outline: none;
+    }
+
+    /* Create close button */
+    .modal a[href="#close"]:after {
+        content: 'X';
+        display: block;
+
+        /* Position */
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        width: 1.5em;
+        padding: 1px 1px 1px 2px;
+
+        /* Style */
+        text-decoration: none;
+        text-shadow: none;
+        text-align: center;
+        font-weight: bold;
+        background: #000;
+        color: #fff;
+        border: 3px solid #fff;
+        -moz-border-radius: 20px;
+        border-radius: 20px;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .modal a[href="#close"]:focus:after,
+    .modal a[href="#close"]:hover:after {
+        -webkit-transform: scale(1.1,1.1);
+        -moz-transform: scale(1.1,1.1);
+    }
+
+    .modal a[href="#close"]:focus:after {
+        outline: 1px solid #000;
+    }
+
+    /* Open modal */
+    a.openModal {
+        margin: 1em auto;
+        display: block;
+        width: 200px;
+        background: #ccc;
+        text-align: center;
+        padding: 10px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+        background: -moz-linear-gradient(#fff, #ddd);
+        background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(230,230,230)));
+        text-shadow: 0 1px 0 #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    }
+
+    a.openModal:hover,
+    a.openModal:focus {
+        background: -moz-linear-gradient(#fff, #ccc);
+        background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(200,200,200)));
+    }
+
+
+    </style>
+
+<style>
+    html, body, div, span, canvas { margin:0; padding:0; }
+    #container {
+        overflow:hidden;
+        position:relative;
+    }
+#pixie {
+	z-index:0;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#040429', EndColorStr='#257eb7');
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#040429', EndColorStr='#257eb7')";
+}
+
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript">
+    var WIDTH;
+    var HEIGHT;
+    var canvas;
+    var con;
+    var g;
+    var pxs = new Array();
+    var rint = 60;
+
+    $(document).ready(function(){
+                      WIDTH = window.innerWidth;
+                      HEIGHT = window.innerHeight;
+                      $('#container').width(WIDTH).height(HEIGHT);
+                      canvas = document.getElementById('pixie');
+                      $(canvas).attr('width', WIDTH).attr('height',HEIGHT);
+                      con = canvas.getContext('2d');
+                      for(var i = 0; i < 100; i++) {
+                      pxs[i] = new Circle();
+                      pxs[i].reset();
+                      }
+                      setInterval(draw,rint);
+
+
+                      var $container = $('#container');
+                      $container.mousedown(function(ev){
+                                           $container.mouseup(function(){
+                                                              $container.unbind('mousemove');
+                                                              $container.unbind('mouseup');
+                                                              });
+                                           });
+                      });
+
+                      function draw() {
+                          con.clearRect(0,0,WIDTH,HEIGHT);
+                          for(var i = 0; i < pxs.length; i++) {
+                              pxs[i].fade();
+                              pxs[i].move();
+                              pxs[i].draw();
+                          }
+                      }
+
+function Circle() {
+	this.s = {ttl:8000, xmax:5, ymax:2, rmax:10, rt:1, xdef:960, ydef:540, xdrift:4, ydrift: 4, random:true, blink:true};
+
+	this.reset = function() {
+		this.x = (this.s.random ? WIDTH*Math.random() : this.s.xdef);
+		this.y = (this.s.random ? HEIGHT*Math.random() : this.s.ydef);
+		this.r = ((this.s.rmax-1)*Math.random()) + 1;
+		this.dx = (Math.random()*this.s.xmax) * (Math.random() < .5 ? -1 : 1);
+		this.dy = (Math.random()*this.s.ymax) * (Math.random() < .5 ? -1 : 1);
+		this.hl = (this.s.ttl/rint)*(this.r/this.s.rmax);
+		this.rt = Math.random()*this.hl;
+		this.s.rt = Math.random()+1;
+		this.stop = Math.random()*.2+.4;
+		this.s.xdrift *= Math.random() * (Math.random() < .5 ? -1 : 1);
+		this.s.ydrift *= Math.random() * (Math.random() < .5 ? -1 : 1);
+	}
+
+	this.fade = function() {
+		this.rt += this.s.rt;
+	}
+
+	this.draw = function() {
+		if(this.s.blink && (this.rt <= 0 || this.rt >= this.hl)) this.s.rt = this.s.rt*-1;
+		else if(this.rt >= this.hl) this.reset();
+		var newo = 1-(this.rt/this.hl);
+		con.beginPath();
+		con.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+		con.closePath();
+		var cr = this.r*newo;
+		g = con.createRadialGradient(this.x,this.y,0,this.x,this.y,(cr <= 0 ? 1 : cr));
+		g.addColorStop(0.0, 'rgba(255,255,255,'+newo+')');
+		g.addColorStop(this.stop, 'rgba(77,101,181,'+(newo*.6)+')');
+		g.addColorStop(1.0, 'rgba(77,101,181,0)');
+		con.fillStyle = g;
+		con.fill();
+	}
+
+	this.move = function() {
+		this.x += (this.rt/this.hl)*this.dx;
+		this.y += (this.rt/this.hl)*this.dy;
+		if(this.x > WIDTH || this.x < 0) this.dx *= -1;
+		if(this.y > HEIGHT || this.y < 0) this.dy *= -1;
+	}
+
+	this.getX = function() { return this.x; }
+	this.getY = function() { return this.y; }
+}
+
+</script>
+
+
+<link href="styles.css" rel="stylesheet">
+	<!--[if lt IE 7]>
+    	<script type="text/javascript" src="js/mootools.js" title="IE6일 경우처리" ></script>
+    	<script type="text/javascript" src="js/core.js"></script>
+	<![endif]-->
+</head>
+
+<body oncontextmenu='return false' ondragstart='return false' onselectstart='return false' onkeydown='return false'>
+
+
+
+    <div id="cont" style="text-align:center">
+        <div class="box" id="top">
+        <img src="line.png" width="100%" height="100%"></br></br>
+            <h1>宮下研究室</h1>
+            <img src="img/main2.png" width="100%" height="100%">
+            <p>
+            <b>「その人だからこそできる」
+
+            </br></br><img src="line.png" width="100%" height="100%"></br></br>
+            <h1 id="two">萌芽研究発表会とは！</h1>
+            <b>まだ芽が出たばかりの新しい研究を発表する会</br>
+            様々な人と対面で議論することで，研究の質を高めるだけでなく，</br>
+            研究に対するモチベーションも高めることができる</b></br>
+            <div class="photos">
+                <ul class="clearfix">
+                    <li><a href="#pic01" rel="lightbox"><img src="img/pic01.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic02" rel="lightbox"><img src="img/pic02.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic03" rel="lightbox"><img src="img/pic03.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic04" rel="lightbox"><img src="img/pic04.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic05" rel="lightbox"><img src="img/pic05.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic06" rel="lightbox"><img src="img/pic06.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic07" rel="lightbox"><img src="img/pic07.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic08" rel="lightbox"><img src="img/pic08.png" width="103" height="100"></a></li>
+
+                    <li><a href="#pic09" rel="lightbox"><img src="img/pic09.png" width="103" height="100"></a></li>
+                </ul>
+            </div>
+            </br><img src="line.png" width="100%" height="100%"></br></br>
+            <h1>発表会概要</h1>
+            <b>主催： 明治大学　宮下研究室</br>
+            日時： 2014/05/13 　18:00 to 21:10</br>
+            会場： 明治大学　中野キャンパス 6F クロスフィールドラウンジ</br>
+            Let's tweet!：   公式ハッシュタグ：#宮下研萌芽</br>
+            告知：	 facebook & Twitter</b></br>
+            </br></br><img src="line.png" width="100%" height="100%"></br></br>
+            <h1 id="three">発表者一覧・グループ</h1>
+            <div style="text-align:center">
+            <table class="sample1">
+            <thead>
+            <tr><th>Aグループ</th><th>Bグループ</th><th>B２ミニプロジェクト発表</th></tr>
+            </thead>
+            <tbody>
+            <tr><th>秋山 耀</br>ジョン ベグ</br>マ ギョクショウ</br>貫 貴裕</br>大家 眸美</br>加藤 邦拓</th>
+            <th>藤掛 悠</br>金井 達巳</br>大島 裕樹</br>高橋 治輝</br>小池 恵里子</br>山中 祥太</th>
+            <th>小林 岳</br>井藤 航佑</br>南舘 拓矢</br>名波 夏平</br>中屋 裕登</br>今城 直紀</br>鈴木 健太</br>高橋 弘毅</br>坂本 龍星</br>高井 菜々子</br>宮代 理弘</br>矢野 秀斗</br>吉村 佳純
+</th></tr>
+            </tbody>
+            </table>
+            </div>
+
+            <img src="line.png" width="100%" height="100%"></br></br>
+
+            <div style="text-align:center" id="timetable">
+            <table class="sample1">
+            <thead>
+	            <tr><th><h2>タイムテーブル</h2></th><th><h2>会場案内</h2></th></tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td width="50%"><p>18:00~18:10　　開会あいさつ</br></br>
+            18:10~18:40　　Aグループ コアタイム</br></br>
+            18:40~19:10　　Bグループ コアタイム</br></br>
+            19:10~20:00　　研究紹介プレゼン ＋ 休憩</br></br>
+            <b>今回発表される研究をそれぞれ30秒で説明します</b></br></br>
+            20:00~20:30　　Aグループ コアタイム</br></br>
+            20:30~21:00　　Bグループ コアタイム</br></br>
+            21:00~21:10　　閉会あいさつ</br> </p></td>
+            <td><p><h3>明治大学　中野（なかの）キャンパス</h3>
+            <b>会場： 東京都中野区中野4-21-1</br>
+            クロスフィールドラウンジ［高層棟6F］</b></p>
+            <a href="https://maps.google.co.jp/maps?ie=UTF8&cid=6231820153962153146&q=%E7%A7%81%E7%AB%8B%E6%98%8E%E6%B2%BB%E5%A4%A7%E5%AD%A6%E4%B8%AD%E9%87%8E%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%91%E3%82%B9%EF%BC%88%E4%BB%AE%E7%A7%B0%EF%BC%89&z=17" target="_blank">
+                <img src="img/map.png" height="150px" width="250px">
+                <p> <<クリックするとグーグルマップにつながります。>> </p>
+                    </a></td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+
+            </p>
+            <img src="line.png" width="100%" height="100%"></br></br>
+            <h2 id="plan">当日の配置図</h2>
+            <img src="plan.jpg" height="100%" width="100%">
+            </br></br><img src="line.png" width="100%" height="100%">
+        </div>
+    </div>
+
+
+
+    <div id="bg">
+        <div>
+            <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <img src="bg.jpg" alt=""/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="position:relative; z-index:100" class="outer">
+        <input type="checkbox" id="slide-checkbox" class="slide-checkbox" role="button">
+			<label for="slide-checkbox" class="slide-toggle" onclick></label>
+			<div class="slide">
+				<ul class="nav">
+					<li><a href="#top">Home</a></li>
+					<li><a href="#two">About</a></li>
+					<li><a href="#three">Presenter</a></li>
+					<li><a href="#timetable">Time table</a></li>
+					<li><a href="#plan">Plan</a></li>
+					<li><a href="http://miyashita.com" target="_blank">Main Homepage</a></li>
+				</ul>
+            </div>
+            </div>
+
+    <aside id="pic01" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic01.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic02" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic02.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic03" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic03.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic04" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic04.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic05" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic05.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic06" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic06.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic07" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic07.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic08" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic08.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+    <aside id="pic09" class="modal">
+        <div style="text-align:center">
+            <img src="img/pic09.png" alt="timetable" height="100%" width="100%">
+                <a href="#close" title="Close">Close</a>
+                </div>
+    </aside>
+
+
+
+
+    <div id="container">
+        <canvas id="pixie"></canvas>
+    </div>
+
+</body>
+
+</html>
