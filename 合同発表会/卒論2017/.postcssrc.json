@@ -1,0 +1,19 @@
+{
+  "map": false,
+  "use": [
+    "postcss-import",
+    "postcss-url",
+    "postcss-cssnext",
+    "csswring"
+  ],
+  "input": "src/styles/index.css",
+  "output": "public/styles/index.css",
+  "postcss-url": {
+    "url": "copy",
+    "assetsPath": "../assets",
+    "useHash": true
+  },
+  "autoprefixer": {
+    "browsers": ["last 2 versions", "safari >= 8"]
+  }
+}

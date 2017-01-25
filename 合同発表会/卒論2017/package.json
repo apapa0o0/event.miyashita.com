@@ -1,0 +1,61 @@
+{
+  "name": "template-browserify",
+  "version": "0.0.0",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "dependencies": {
+    "basscss": "^8.0.3",
+    "normalize.css": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-babili": "^0.0.10",
+    "babel-preset-env": "^1.1.8",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.6",
+    "browserify": "^13.3.0",
+    "cpx": "^1.5.0",
+    "csswring": "^5.1.1",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "licensify": "^3.1.2",
+    "mkdirp": "^0.5.1",
+    "npm-run-all": "^4.0.1",
+    "postcss-cli": "^2.6.0",
+    "postcss-cssnext": "^2.9.0",
+    "postcss-import": "^9.1.0",
+    "postcss-url": "^5.1.2",
+    "pug-cli": "^1.0.0-alpha6",
+    "rimraf": "^2.5.4",
+    "sane": "^1.5.0",
+    "watchify": "^3.8.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm-run-all -p build:*",
+    "build:assets": "cpx \"src/assets/**/*\" public/assets",
+    "build:browserify": "browserify src/scripts/index.js --plugin licensify | babel --no-babelrc --compact --out-file public/scripts/index.js",
+    "build:postcss": "postcss --config .postcssrc.json",
+    "build:pug": "pug --out public --obj src/_configs/config.json src/index.pug",
+    "postbuild": "npm-run-all postbuild:copy clean",
+    "postbuild:copy": "cpx \"public/**/*\" ./",
+    "clean": "rimraf public",
+    "init": "npm-run-all init:clean init:mkdir",
+    "init:clean": "npm run clean",
+    "init:mkdir": "mkdirp public public/scripts public/styles public/assets",
+    "prebuild": "npm run init",
+    "prewatch": "npm run init",
+    "start": "npm run watch",
+    "watch": "npm-run-all -p watch:*",
+    "watch:assets": "npm run build:assets -- --watch",
+    "watch:browserify": "watchify src/scripts/index.js --outfile public/scripts/index.js --debug",
+    "watch:postcss": "npm run build:postcss -- --watch --map.inline",
+    "watch:pug": "npm run build:pug -- --watch",
+    "watch:serve": "browser-sync start --server public --files public --port 8000 --no-open"
+  }
+}

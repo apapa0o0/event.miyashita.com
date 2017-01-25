@@ -1,0 +1,12 @@
+{
+  "sourceMaps": "inline",
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 8"]
+      },
+      "exclude": ["transform-regenerator"]
+    }],
+    "babili"
+  ]
+}

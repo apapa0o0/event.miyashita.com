@@ -1,0 +1,47 @@
+@import "normalize.css";
+@import "basscss";
+@import "https://fonts.googleapis.com/earlyaccess/sawarabimincho.css";
+
+body {
+  font-family: "游明朝", "Yu Mincho", "游明朝体", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "ＭＳ 明朝", "Sawarabi Mincho", serif;
+  line-height: 2.0;
+  @media (max-width: 40em) {
+    font-size: 12px;
+  }
+}
+
+wbr {
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+section {
+  & .justify > p {
+    text-indent: 1.0em;
+    @media (max-width: 40em) {
+      font-size: 14px;
+    }
+    & .bold,
+    & strong {
+      font-family: "游ゴシック", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "ＭＳ ゴシック", sans-serif;
+    }
+  }
+  & ul.bullets > li {
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-radius: 0.2em;
+      border: 0.2em solid black;
+      box-sizing: border-box;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      margin-bottom: 0.2em;
+    }
+    @media (max-width: 40em) {
+      font-size: 14px;
+    }
+  }
+}
